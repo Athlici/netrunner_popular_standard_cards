@@ -2,6 +2,7 @@ require "net/http"
 require "json"
 require "fileutils"
 require "date"
+require 'cgi'
 
 IMG_URL = "https://static.nrdbassets.com/v1/large/{code}.jpg"
 NRDB_URL = "https://netrunnerdb.com/en/card/{code}"
@@ -219,7 +220,7 @@ def main()
     sorted.each do |card, count|
       data = get_card(card)
       pack = data["pack_code"]
-      title = data["title"].sub("\"", "'")
+      title =  CGI.escapeHTML(data["title"])
       faction = data["faction_code"]
       identity = data["type_code"] == "identity"
       match_faction = group == "runner" || group == "corp" || group == faction
