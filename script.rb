@@ -7,8 +7,8 @@ require 'cgi'
 IMG_URL = "https://static.nrdbassets.com/v1/large/{code}.jpg"
 NRDB_URL = "https://netrunnerdb.com/en/card/{code}"
 
-STANDARD = ["dad", "23s", "bm", "es", "in", "ml", "qu", "dc", "so", "eas", "baw", "fm", "cd", "ss", "dtwn", "cotc", "tdatd", "win", "ka", "rar", "mo", "df", "ur", "urbp", "mor", "sg", "su21", "msbp", "ms", "ph"]
-STARTUP = ["ph","ms","su21","sg","msbp", "df", "ur", "urbp"]
+STANDARD = ["elev","sg","rwr","tai","ph","ms","msbp","ur","urbp","df"]
+STARTUP  = ["elev","sg","rwr","tai"]
 API_URL = "https://netrunnerdb.com/api/2.0/public/"
 WAIT_TIME = 5
 CACHE = {}
@@ -184,7 +184,7 @@ end
 
 def main()
   puts "getting active packs..."
-  days = 365
+  days = 105
   stats_by_group = Hash.new do |h,k|
     stats = Hash.new { |h,k| h[k] = 0 }
     h[k] = stats
@@ -235,7 +235,7 @@ def main()
 
   cards_by_group.each { |group, cards| output_group(group, cards) }
   yesterday = Date.today - 1
-  output_toc(standard_decks.size, yesterday, yesterday - 365)
+  output_toc(standard_decks.size, yesterday, yesterday - days)
 end
 
 #puts get_card(33048)
